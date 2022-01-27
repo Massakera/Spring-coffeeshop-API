@@ -1,4 +1,4 @@
-package com.example.apitest;
+package com.thehecklers.sburrestdemo;
 
 import java.util.UUID;
 
@@ -6,10 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApitestApplication {
+public class SburRestDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApitestApplication.class, args);
+		SpringApplication.run(SburRestDemoApplication.class, args);
 	}
 
 }
@@ -25,7 +25,6 @@ class Coffee {
 
 	public Coffee(String name) {
 		this(UUID.randomUUID().toString(), name);
-
 	}
 
 	public String getId() {
