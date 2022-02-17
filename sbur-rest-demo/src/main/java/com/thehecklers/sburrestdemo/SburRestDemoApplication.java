@@ -2,6 +2,8 @@ package com.thehecklers.sburrestdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +16,11 @@ import javax.persistence.Id;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @SpringBootApplication
+@ConfigurationPropertiesScan
 public class SburRestDemoApplication {
 
 	public static void main(String[] args) {
@@ -116,5 +121,61 @@ class Coffee {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+}
+
+@RestController
+@RequestMapping("/greeting")
+class GreetingController {
+	private final Greeting greeting;
+
+	public GreetingController(Greeting greeting) {
+		this.greeting = greeting;
+	}
+
+	@GetMapping
+	String getNameAndCoffee() {
+		return greeting.getCoffee();
+	}
+}
+@ConfigurationProperties(prefix = "greeting")
+class Greeting {
+	private String name;
+	private String coffee;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCoffee() {
+		return coffee;
+	}
+
+	public void setCoffee(String coffee) {
+		this.coffee = coffee;
+	}
+}
+
+class Droid {
+	private String id, description;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
